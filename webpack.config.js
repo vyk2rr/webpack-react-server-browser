@@ -10,7 +10,7 @@ const browserConfig = {
   },
   devtool: "cheap-module-source-map",
   module: {
-    rules: [
+    loaders: [
       {
         test: [/\.jpg$/],
         loader: "file-loader",
@@ -20,18 +20,14 @@ const browserConfig = {
         }
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
           use: [
-            {
-              loader: "css-loader",
-              options: { importLoaders: 1 }
-            },
-            {
-              loader: "postcss-loader",
-              options: { plugins: [autoprefixer()] }
-            }
-          ]
+            'css-loader',
+            'sass-loader'
+          ],
+          publicPath: "public/css"
         })
       },
       {
@@ -43,9 +39,7 @@ const browserConfig = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: "public/css/[name].css"
-    })
+    new ExtractTextPlugin('public/css/main.css')
   ]
 };
 
@@ -68,14 +62,6 @@ const serverConfig = {
           publicPath: url => url.replace(/public/, ""),
           emit: false
         }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: "css-loader/locals"
-          }
-        ]
       },
       {
         test: /js$/,
