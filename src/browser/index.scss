@@ -1,0 +1,22 @@
+body {
+	h1 {
+		color: red;
+	}
+
+	p {
+		@extend .bordered;
+		border:1px solid red;
+		font-size: 40px;
+	}
+
+	.bordered {
+		border: 10px dashed gray;
+	}
+
+	.test {
+		border: 10px solid black;
+		font-size: 40px;
+	}
+
+
+}

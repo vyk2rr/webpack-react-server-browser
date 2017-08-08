@@ -28,7 +28,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <button onClick={this.onClick}>Click here to toggle</button>
+        <p className="text-success">text success</p>
+        <button className="btn btn-success test" onClick={this.onClick}>Click here to toggle</button>
         {hiddenPartUntilClick}
       </div>
     );
